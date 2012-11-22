@@ -1,4 +1,4 @@
-# -*- mode: python; encoding: utf-8 -*-
+blh# -*- mode: python; encoding: utf-8 -*-
 #
 # Copyright 2012 Jens Lindström, Opera Software ASA
 #
