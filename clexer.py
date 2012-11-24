@@ -293,23 +293,6 @@ class Token:
         else:
             return self.__value
 
-def tokenize(tokens, filename="<unknown>"):
-    line = 1
-    column = 0
-
-    for token in tokens:
-        if isinstance(token, Token):
-            yield token
-            token = str(token)
-        else: yield Token(token, filename, line, column)
-
-        linebreaks = token.count("\n")
-        if linebreaks:
-            line += linebreaks
-            column = len(token) - 1 - token.rindex("\n")
-        else:
-            column += len(token)
-
 def locate(tokens, index):
     line = 1
     column = 0
