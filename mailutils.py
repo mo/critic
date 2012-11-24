@@ -20,14 +20,6 @@ import time
 import os
 import signal
 
-def generateMessageId(index=1):
-    now = time.time()
-
-    timestamp = time.strftime("%Y%m%d%H%M%S", time.gmtime(now))
-    timestamp_ms = "%04d" % ((now * 10000) % 10000)
-
-    return "%s.%s.%04d" % (timestamp, timestamp_ms, index)
-
 def queueMail(from_user, to_user, recipients, subject, body, review_url=None, review_association=None, message_id=None, parent_message_id=None):
     if not message_id: message_id = generateMessageId()
 
@@ -51,6 +43,14 @@ def queueMail(from_user, to_user, recipients, subject, body, review_url=None, re
 
     file.close()
     return filename
+
+def generateMessageId(index=1):
+    now = time.time()
+
+    timestamp = time.strftime("%Y%m%d%H%M%S", time.gmtime(now))
+    timestamp_ms = "%04d" % ((now * 10000) % 10000)
+
+    return "%s.%s.%04d" % (timestamp, timestamp_ms, index)
 
 class User:
     def __init__(self, name, email, fullname):
