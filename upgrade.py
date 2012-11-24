@@ -23,6 +23,20 @@ import os.path
 import argparse
 import installation
 
+def convertUTF8(text):
+    # Check if it's already valid UTF-8 and return it unchanged if so.
+    try:
+        text.decode('utf-8')
+        return text
+    except: pass
+
+    # Try to decode as latin-1.
+    try: return text.decode('latin-1').encode('utf-8')
+    except: pass
+
+    # Fallback: just replace all non-ASCII characters with '?'.
+    return re.sub("[\x80-\xff]", "?", text)
+
 parser = argparse.ArgumentParser(description="Critic upgrade script")
 
 parser.add_argument("--etc-dir", default="/etc/critic", help="directory where the Critic system configuration is stored", action="store")
