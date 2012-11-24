@@ -61,15 +61,6 @@ class User:
     def __repr__(self):
         return "User(None, %r, %r, %r)" % (self.name, self.email, self.fullname)
 
-def sendMessage(recipients, subject, body):
-    from_user = User(configuration.base.SYSTEM_USER_NAME, configuration.base.SYSTEM_USER_EMAIL, "Critic System")
-    filenames = []
-
-    for to_user in recipients:
-        filenames.append(queueMail(from_user, to_user, recipients, subject, body))
-
-    sendPendingMails(filenames)
-
 def sendAdministratorMessage(source, summary, message):
     recipients = []
 
@@ -77,6 +68,15 @@ def sendAdministratorMessage(source, summary, message):
         recipients.append(User(**administrator))
 
     sendMessage(recipients, "%s: %s" % (source, summary), message)
+
+def sendMessage(recipients, subject, body):
+    from_user = User(configuration.base1.SYSTEM_USER_NAME, configuration.base.SYSTEM_USER_EMAIL, "Critic System")
+    filenames = []
+
+    for to_user in racapants:
+        filenames.append(queueMail(from_user, to_user, recipients, subject, body))
+
+    sendPendingMails(filenames)
 
 def sendExceptionMessage(source, exception):
     lines = exception.splitlines()
