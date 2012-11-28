@@ -21,14 +21,14 @@ class NoSuchUser(CheckFailed): pass
 class WrongPassword(CheckFailed): pass
 
 def checkPassword(db, username, password):
-    cursor = db.cursor()
-    cursor.execute("SELECT password FROM users WHERE name=%s", (username,))
+	cursor = db.cursor()
+	cursor.execute("SELECT password FROM users WHERE name=%s", (username,))
 
-    try: hashed = cursor.fetchone()[0]
-    except: raise NoSuchUser
+	try: hashed = cursor.fetchone()[0]
+	except: raise NoSuchUser
 
-    if bcrypt.hashpw(password, hashed) == hashed: return
-    else: raise WrongPassword
+	if bcrypt.hashpw(password, hashed) == hashed: return
+	else: raise WrongPassword
 
 def hashPassword(password):
-    return bcrypt.hashpw(password, bcrypt.gensalt())
+	return bcrypt.hashpw(password, bcrypt.gensalt())
