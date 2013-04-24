@@ -31,7 +31,7 @@ class GetAutoCompleteData(Operation):
         data = {}
 
         if "users" in values:
-            cursor.execute("SELECT name, fullname FROM users WHERE status!='retired' ORDER BY name")
+            cursor.execute("SELECT name, fullname FROM users WHERE status!='retired'")
             data["users"] = dict(cursor)
 
         if "paths" in values:
