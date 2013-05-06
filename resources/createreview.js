@@ -183,7 +183,7 @@ function updateFilters(add_reviewer)
                                   url: "getautocompletedata",
                                   data: { values: ["users", "paths"],
                                           changeset_ids: review.changeset_ids },
-                                  callback: enableAutoCompletion })
+                                  callback: enableAutoCompletion });
 
   operation.execute();
 }
@@ -302,7 +302,7 @@ function editRecipientList()
   var operation = new Operation({ action: "get auto-complete data",
                                   url: "getautocompletedata",
                                   data: { values: ["users"] },
-                                  callback: enableAutoCompletion })
+                                  callback: enableAutoCompletion });
 
   operation.execute();
 }
