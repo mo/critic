@@ -41,7 +41,7 @@ def flag_minimum_password_hash_time(commit_sha1):
         return True
 
 # Directory (on guest system) to store coverage data in.
-COVERAGE_DIR = "/var/lib/critic/coverage"
+COVERAGE_DIR = "/var/tmp/critic/coverage"
 
 def setnonblocking(fd):
     fcntl.fcntl(fd, fcntl.F_SETFL, fcntl.fcntl(fd, fcntl.F_GETFL) | os.O_NONBLOCK)
@@ -554,8 +554,8 @@ class Instance(object):
 
         if self.coverage:
             sys.stdout.write(self.execute(
-                ["sudo", "python", "src/coverage.py",
+                ["sudo", "python", "coverage.py",
                  "--coverage-dir", COVERAGE_DIR,
                  "--critic-dir", "/etc/critic/main",
                  "--critic-dir", "/usr/share/critic"],
-                cwd="critic"))
+                cwd="/usr/share/critic"))
