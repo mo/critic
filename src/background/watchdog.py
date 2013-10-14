@@ -69,11 +69,13 @@ class Watchdog(background.utils.BackgroundProcess):
 
             def sendLoadAverageWarning(interval, limit, load):
                 cpu_count = multiprocessing.cpu_count()
-                sendAdministratorMessage("watchdog", "%d-minute load average" % interval,
-                                         ("The current %d-minute load average is %.2f!\n" % (interval, load)) +
-                                         ("The configured limit is %.2f (%.2f x %d CPUs).\n" % (limit, limit / cpu_count, cpu_count)) +
-                                         "\n" +
-                                         "-- critic\n")
+                mailutils.sendAdministratorMessage(
+                    "watchdog", "%d-minute load average" % interval,
+                    ("The current %d-minute load average is %.2f!\n"
+                     % (interval, load)) +
+                    ("The configured limit is %.2f (%.2f x %d CPUs).\n"
+                     % (limit, limit / cpu_count, cpu_count)) +
+                    "\n-- critic\n")
 
             try:
                 load1, load5, load15 = os.getloadavg()
